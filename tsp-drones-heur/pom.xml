@@ -8,13 +8,13 @@
 		<artifactId>tsp-drones</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>tsp-drones-core</artifactId>
-	<name>tsp-drones-core</name>
+	<artifactId>tsp-drones-heur</artifactId>
+	<name>tsp-drones-heur</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<packaging>pom</packaging>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -57,6 +57,22 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.5</version>
 		</dependency>
+		<dependency>
+			<groupId>nl.rsm.tom</groupId>
+			<artifactId>tsp-drones-core</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.combinatoricslib</groupId>
+			<artifactId>combinatoricslib</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+			<version>1.13</version>
+		</dependency>
+
 	</dependencies>
-	<description>Core classes for the Travelling Salesman Problem with Drone (TSP-D). It deals with instances, solutions, solvers and input/output of these things.</description>
+	<description>Heuristics for the Travelling Salesman Problem with Drone (TSP-D).</description>
 </project>

@@ -38,5 +38,6 @@
 	</dependencies>
 	<modules>
 		<module>tsp-drones-core</module>
+		<module>tsp-drones-heur</module>
 	</modules>
 </project>

@@ -1,84 +1,26 @@
 package nl.rsm.tom.drones.test;
 
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import nl.rsm.tom.drones.data.Vec2D;
-import nl.rsm.tom.drones.data.instance.GeometricInstance;
-import nl.rsm.tom.drones.data.instance.GraphInstance;
-import nl.rsm.tom.drones.data.instance.MatrixInstance;
-import nl.rsm.tom.drones.data.instance.RandomGenerators;
-import nl.rsm.tom.drones.data.io.InstanceIO;
+import static nl.rsm.tom.drones.util.TestInstances.getGeometricInstances;
+import static nl.rsm.tom.drones.util.TestInstances.getGraphInstances;
+import static nl.rsm.tom.drones.util.TestInstances.getMatrixInstances;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import nl.rsm.tom.drones.data.instance.GeometricInstance;
+import nl.rsm.tom.drones.data.instance.GraphInstance;
+import nl.rsm.tom.drones.data.instance.MatrixInstance;
+import nl.rsm.tom.drones.data.io.InstanceIO;
+
+/**
+ * Unit tests for input and output, which check whether instances can be
+ * written to file and then read back again.
+ * @author Paul Bouman
+ *
+ */
 public class InstanceIOTest {
 
-	public static List<GeometricInstance> getGeometricInstances(int count)
-	{
-		Random ran = new Random(1234);
-		List<GeometricInstance> result = new ArrayList<>();
-		for (int t=0; t < count; t++)
-		{
-			GeometricInstance instance = RandomGenerators.randomInstance(20, ran, 0.5);
-			result.add(instance);
-		}
-		return result;
-	}
-
-	public static List<GraphInstance<Integer>> getGraphInstances(int count)
-	{
-		Random ran = new Random(1234);
-		List<GraphInstance<Integer>> result = new ArrayList<>();
-		for (int t=0; t < count; t++)
-		{
-			GraphInstance<Integer> instance = RandomGenerators.randomInstance(20, 0.2, ran, 0.5);
-			result.add(instance);
-		}
-		return result;
-	}
-	
-	public static List<MatrixInstance<?>> getMatrixInstances(int count)
-	{
-		List<MatrixInstance<?>> result = new ArrayList<>();
-		result.addAll(getMatrixGraphInstances((int)Math.ceil(count/2d)));
-		result.addAll(getMatrixGeometricInstances(count/2));
-		return result;
-	}
-	
-	public static List<MatrixInstance<Integer>> getMatrixGraphInstances(int count)
-	{
-		Random ran = new Random(1234);
-		List<MatrixInstance<Integer>> result = new ArrayList<>();
-		for (int t=0; t < count; t++)
-		{
-			GraphInstance<Integer> instance = RandomGenerators.randomInstance(20, 0.2, ran, 0.5);
-			MatrixInstance<Integer> mi = new MatrixInstance<Integer>(instance);
-			result.add(mi);
-		}
-		return result;
-	}
-
-
-	public static List<MatrixInstance<Vec2D>> getMatrixGeometricInstances(int count)
-	{
-		Random ran = new Random(1234);
-		List<MatrixInstance<Vec2D>> result = new ArrayList<>();
-
-		for (int t=0; t < count; t++)
-		{
-			GeometricInstance instance = RandomGenerators.randomInstance(20, ran, 0.5);
-			MatrixInstance<Vec2D> mi = new MatrixInstance<Vec2D>(instance);
-			result.add(mi);
-		}
-		return result;
-	}
-	
-	
 	@Test
 	public void testGeometricInstances()
 	{
