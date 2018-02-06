@@ -1,0 +1,53 @@
+/* Copyright 2017 Paul Bouman
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the  
+ * "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * In case you use this software for research purposes, it is appreciated if you provide a citation of the following paper:
+ * 
+ * N.A.H. Agatz, P.C. Bouman & M.E. Schmidt. Optimization Approaches for the Traveling Salesman Problem with Drone. Transportation Science.
+ * 
+ * The paper still has to appear, but was accepted for publication. This notice will be updated with a more detailed reference if that
+ * information is available.
+ */
+package nl.rsm.tom.drones.optable.constraints;
+
+import nl.rsm.tom.drones.optable.OperationEntry;
+
+/**
+ * Class that is used to model constraints on which operations are valid.
+ * This particular type of constraint restricts the number of locations
+ * in an operation that are only visited by the truck.
+ * @author Paul Bouman
+ *
+ */
+public class CardinalityConstraint implements OpConstraint<Object,Object>
+{
+	
+	private final int maxCardinality;
+	
+	/**
+	 * Creates a CardinalityConstraint object which indicates that the number
+	 * of truck-only location in an operation can not exceed some maximum.
+	 * @param max the maximum allowed number of truck-only locations in an operation.
+	 */
+	public CardinalityConstraint(int max)
+	{
+		maxCardinality = max;
+	}
+
+	@Override
+	public boolean isValid(OperationEntry<? extends Object, ? extends Object> entry)
+	{
+		return entry.getTruckOnlyCount() <= maxCardinality;
+	}
+}
