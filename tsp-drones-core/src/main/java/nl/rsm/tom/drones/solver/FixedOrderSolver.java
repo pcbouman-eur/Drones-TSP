@@ -69,4 +69,15 @@ public interface FixedOrderSolver<E>
 	{
 		return Collections.emptyMap();
 	}
+	
+	/**
+	 * Converts this FixedOrderSolver into a regular Solver using another solver
+	 * to bootstrap the solving process
+	 * @param bootstrapSolver the bootstrapping solver
+	 * @return a regular Solver that first applies the bootstrapSolver, and then this FixedOrderSolver
+	 */
+	default public Solver<E> bootstrap(Solver<E> bootstrapSolver)
+	{
+		return i -> solve(i, bootstrapSolver.solve(i));
+	}
 }
