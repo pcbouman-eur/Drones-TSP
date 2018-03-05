@@ -1,0 +1,14 @@
+,--------.  ,---.   ,------.          ,------.   
+'--.  .--' '   .-'  |  .--. ' ,-----. |  .-.  \  
+   |  |    `.  `-.  |  '--' | '-----' |  |  \  : 
+   |  |    .-'    | |  | --'          |  '--'  / 
+   `--'    `-----'  `--'              `-------'  
+                                                 
+Instance generator for the Travelling Salesman Problem with Drone
+Copyright 2018 Paul Bouman
+
+Please use the following reference if you use this software in your research:
+
+N.A.H. Agatz, P.C. Bouman & M.E. Schmidt.
+Optimization Approaches for the Traveling Salesman Problem with Drone.
+Transportation Science.

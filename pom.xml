@@ -40,5 +40,6 @@
 		<module>tsp-drones-core</module>
 		<module>tsp-drones-heur</module>
 		<module>tsp-drones-mip</module>
+                <module>tsp-drones-generate</module>
 	</modules>
 </project>
