@@ -49,21 +49,25 @@ public class GeneratorShell
 	private double alpha = 2;
 	private boolean useDate = false;
 	private boolean overwrite = false;
+
+	private boolean makeFolder = false;
 	
 	private int offset = 0;
 	private File output = new File(".");
 	private long seed = 54321;
 	
-	@ShellMethod(value="Set whether the current date should be part of the output filename (default: false)", key="use_date")
-	public void setSeed(boolean useDate)
+	@ShellMethod(value="Set whether the current date should be part of the output filename (default: false)", key="toggle_date")
+	public boolean setDate()
 	{
-		this.useDate = useDate;
+		this.useDate = !this.useDate;
+		return this.useDate;
 	}
 	
-	@ShellMethod(value="Set whether existing output files can be overwritten (default: false)", key="overwrite")
-	public void setOverwrite(boolean overwrite)
+	@ShellMethod(value="Set whether existing output files can be overwritten (default: false)", key="toggle_overwrite")
+	public boolean setOverwrite()
 	{
-		this.overwrite = overwrite;
+		this.overwrite = !this.overwrite;
+		return this.overwrite;
 	}
 	
 	@ShellMethod(value="Set the seed used to generate instances", key="set_seed")
@@ -78,6 +82,13 @@ public class GeneratorShell
 		return this.seed;
 	}
 	
+	@ShellMethod(value="Set whether to create subfolders based on the instance types generated (default: false)", key="toggle_subfolder")
+	public boolean setSubfolder()
+	{
+		this.makeFolder = !this.makeFolder;
+		return this.makeFolder;
+	}
+
 	@ShellMethod(value="Set the relative speed of the drone compare to the truck", key="set_alpha")
 	public void setAlpha(double alpha)
 	{
@@ -146,22 +157,32 @@ public class GeneratorShell
 			LocalDate ld = LocalDate.now();
 			prefix += ld.toString().replaceAll("-", "_")+"-";
 		}
-		String postfix = "-alpha_";
+		
+		String alphaStr = "";
 		if (alpha % 1.0 < 0.001)
 		{
-			postfix += String.format(Locale.US, "%d", (int)Math.round(alpha));
+			alphaStr = String.format(Locale.US, "%d", (int)Math.round(alpha));
 		}
 		else
 		{
-			postfix += String.format(Locale.US, "%.3f", alpha);
+			alphaStr = String.format(Locale.US, "%.3f", alpha);
 		}
-		postfix += "-n"+locs+".txt";
-		
+		String postfix = "-alpha_"+alphaStr+"-n"+locs+".txt";
+	
+		File outDir = output;
+		if (makeFolder)
+		{
+			String dirname = "inputs"+"-n"+locs+"-alpha_"+alphaStr+"-"+type;
+			outDir = new File(outDir, dirname);
+			outDir.mkdirs();	
+		}
+
+
 		Random ran = new Random(seed);
 		for (int i=1; i <= instances; i++)
 		{
 			String filename = prefix+(offset+i)+postfix;
-			File outFile = new File(output, filename);
+			File outFile = new File(outDir, filename);
 			if (outFile.exists() && !overwrite)
 			{
 				throw new IOException("File "+filename+" already exists and overwrite mode is not enabled. Aborting.");
