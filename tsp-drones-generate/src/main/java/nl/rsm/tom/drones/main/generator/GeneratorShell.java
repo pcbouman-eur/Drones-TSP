@@ -132,7 +132,8 @@ public class GeneratorShell
 	@ShellMethod(value="Generates a number of uniform instances", key="gen_uniform")
 	public void generateUniform(int instances, int locations, @ShellOption(defaultValue="100") int gridSize) throws IOException
 	{
-		generate(instances, "uniform", alpha, locations, r -> RandomGenerators.randomInstance(locations, r, 1, 1d/alpha, 100));
+		// The -1 is used because the uniform generator does not include the depot in the number of locations.
+		generate(instances, "uniform", alpha, locations, r -> RandomGenerators.randomInstance(locations-1, r, 1, 1d/alpha, 100));
 	}
 	
 	@ShellMethod(value="Generates a number of single center instances", key="gen_singlecenter")

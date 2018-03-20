@@ -11,4 +11,4 @@ Please use the following reference if you use this software in your research:
 
 N.A.H. Agatz, P.C. Bouman & M.E. Schmidt.
 Optimization Approaches for the Traveling Salesman Problem with Drone.
-Transportation Science.
+Transportation Science. https://doi.org/10.1287/trsc.2017.0791
