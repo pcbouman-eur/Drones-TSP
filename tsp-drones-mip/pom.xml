@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>nl.rsm.tom</groupId>
 		<artifactId>tsp-drones</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	<artifactId>tsp-drones-mip</artifactId>
 	<name>tsp-drones-mip</name>
