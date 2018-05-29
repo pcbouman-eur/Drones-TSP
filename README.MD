@@ -26,6 +26,9 @@ git clone https://github.com/pcbouman-eur/Drones-TSP.git
 cd Drones-TSP
 mvn package
 ```
-This will download the necessary dependencies and run a couple of unit tests and, if succesful, package the modules as jar files. The results can be found in the `target` directories of the individual modules.
+This will download the necessary dependencies and run a couple of unit tests and, if succesful, package the modules as jar files. The results can be found in the `target` directories of the individual modules. By default, the `tsp-drones-mip` module is not enabled by default. If you want to compile that as well, use
+```
+mvn package -P all
+```
 
 Note that the `tsp-drones-mip` module requires an installed version of the IBM ILOG CPLEX Optimization Studio V12.6.3.
