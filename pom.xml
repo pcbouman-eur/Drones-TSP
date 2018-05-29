@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -11,6 +12,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -36,10 +38,31 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>all</id>
+			<modules>
+				<module>tsp-drones-core</module>
+				<module>tsp-drones-heur</module>
+				<module>tsp-drones-mip</module>
+				<module>tsp-drones-generate</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>nomip</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>tsp-drones-core</module>
+				<module>tsp-drones-heur</module>
+				<module>tsp-drones-generate</module>
+			</modules>
+		</profile>
+	</profiles>
+
 	<modules>
-		<module>tsp-drones-core</module>
-		<module>tsp-drones-heur</module>
-		<module>tsp-drones-mip</module>
-                <module>tsp-drones-generate</module>
+
 	</modules>
 </project>

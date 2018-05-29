@@ -32,17 +32,29 @@
 				<version>3.0.0</version>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-assembly-plugin</artifactId>
+	            <version>3.1.0</version>
+	                        <configuration>
+	                <descriptorRefs>
+	                    <descriptorRef>jar-with-dependencies</descriptorRef>
+	                </descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>nl.rsm.tom.drones.main.Main</mainClass>
+							<mainClass>nl.rsm.tom.drones.main.MainHeuristic</mainClass>
 						</manifest>
 					</archive>
-				</configuration>
-			</plugin>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>assemble-all</id>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>single</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+        	</plugin>
 		</plugins>
 	</build>
 
